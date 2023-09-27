@@ -5,7 +5,7 @@ class App extends React.Component {
     questions = [
         {
             id: 1,
-            questionText: "1 + 3 = ?",
+            questionText: "1 + 3 = ???",
             answerOptions: [
                 { answerText: "4", isCorrect: true },
                 { answerText: "5", isCorrect: false },
@@ -15,7 +15,7 @@ class App extends React.Component {
         },
         {
             id: 2,
-            questionText: "5 + 3 = ?",
+            questionText: "5 + 3 = ???",
             answerOptions: [
                 { answerText: "9", isCorrect: false },
                 { answerText: "8", isCorrect: true },
@@ -25,7 +25,7 @@ class App extends React.Component {
         },
         {
             id: 3,
-            questionText: "4 + 2 = ?",
+            questionText: "4 + 2 = ???",
             answerOptions: [
                 { answerText: "4", isCorrect: false },
                 { answerText: "5", isCorrect: false },
@@ -35,7 +35,7 @@ class App extends React.Component {
         },
         {
             id: 4,
-            questionText: "8 + 2 = ?",
+            questionText: "8 + 2 = ???",
             answerOptions: [
                 { answerText: "12", isCorrect: false },
                 { answerText: "11", isCorrect: false },
@@ -80,7 +80,7 @@ class App extends React.Component {
             <div className="app">
                 {showScore ? (
                     <div>
-                        <div>
+                        <div className="score-section">
                             You scored {score} out of {this.questions.length}
                         </div>
                         <button
@@ -96,19 +96,22 @@ class App extends React.Component {
                         </button>
                     </div>
                 ) : showStartButton ? (
-                    <button
-                        onClick={() =>
-                            this.setState({
-                                showStartButton: false,
-                            })
-                        }
-                    >
-                        START
-                    </button>
+                    <div className="start-section">
+                        <p>Click to Start</p>
+                        <button
+                            onClick={() =>
+                                this.setState({
+                                    showStartButton: false,
+                                })
+                            }
+                        >
+                            START
+                        </button>
+                    </div>
                 ) : (
                     <div className="question-section">
-                        <div className="qustions-count">
-                            <span>Question {currentQuestion + 1}</span>/
+                        <div className="questions-count">
+                            <span>Question {currentQuestion + 1}</span>/{" "}
                             {this.questions.length}
                         </div>
                         <div className="question-text">
