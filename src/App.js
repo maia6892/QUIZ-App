@@ -46,11 +46,9 @@ class App extends React.Component {
         super(props);
         this.state = {
             currentQuestion: 0,
-            setCurrentQuestion: 0,
             showScore: false,
-            setShowScore: false,
             score: 0,
-            setScore: 0,
+            showStartButton: true,
         };
     }
 
@@ -76,7 +74,8 @@ class App extends React.Component {
     };
 
     render() {
-        const { currentQuestion, showScore, score } = this.state;
+        const { currentQuestion, showScore, score, showStartButton } =
+            this.state;
         return (
             <div className="app">
                 {showScore ? (
@@ -96,6 +95,16 @@ class App extends React.Component {
                             RESET
                         </button>
                     </div>
+                ) : showStartButton ? (
+                    <button
+                        onClick={() =>
+                            this.setState({
+                                showStartButton: false,
+                            })
+                        }
+                    >
+                        START
+                    </button>
                 ) : (
                     <div className="question-section">
                         <div className="qustions-count">
