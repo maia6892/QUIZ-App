@@ -41,19 +41,18 @@ class App extends React.Component {
             ],
         },
     ];
+
     constructor(props) {
         super(props);
         this.state = {
             currentQuestion: 0,
+            setCurrentQuestion: 0,
             showScore: false,
+            setShowScore: false,
             score: 0,
+            setScore: 0,
         };
     }
-    initialState = {
-        setCurrentQuestion: 0,
-        setShowScore: false,
-        setScore: 0,
-    };
 
     handleAnswerButtonClick = () => {
         const nextQuestion = this.state.currentQuestion + 1;
@@ -76,54 +75,54 @@ class App extends React.Component {
         }
     };
 
-    restartQuiz = () => {
-        
-    };
-
     render() {
+        const { currentQuestion, showScore, score } = this.state;
         return (
             <div className="app">
-                {this.state.showScore ? (
+                {showScore ? (
                     <div>
                         <div>
-                            You scored {this.state.score} out of{" "}
-                            {this.questions.length}
+                            You scored {score} out of {this.questions.length}
                         </div>
-                        <button onClick={() => this.restartQuiz}>RESET</button>
+                        <button
+                            onClick={() =>
+                                this.setState({
+                                    showScore: false,
+                                    score: 0,
+                                    currentQuestion: 0,
+                                })
+                            }
+                        >
+                            RESET
+                        </button>
                     </div>
                 ) : (
                     <div className="question-section">
                         <div className="qustions-count">
-                            <span>
-                                Question {this.state.currentQuestion + 1}
-                            </span>
-                            /{this.questions.length}
+                            <span>Question {currentQuestion + 1}</span>/
+                            {this.questions.length}
                         </div>
                         <div className="question-text">
-                            {
-                                this.questions[this.state.currentQuestion]
-                                    .questionText
-                            }
+                            {this.questions[currentQuestion].questionText}
                         </div>
                         <div className="answer-section">
-                            {this.questions[
-                                this.state.currentQuestion
-                            ].answerOptions.map((answerOption) => (
-                                <button
-                                    onClick={() =>
-                                        this.checkIsCorrect(
-                                            answerOption.isCorrect
-                                        )
-                                    }
-                                >
-                                    {answerOption.answerText}
-                                </button>
-                            ))}
+                            {this.questions[currentQuestion].answerOptions.map(
+                                (answerOption) => (
+                                    <button
+                                        onClick={() =>
+                                            this.checkIsCorrect(
+                                                answerOption.isCorrect
+                                            )
+                                        }
+                                    >
+                                        {answerOption.answerText}
+                                    </button>
+                                )
+                            )}
                         </div>
                         <div className="button-section">
                             <button onClick={this.handleAnswerButtonClick}>
-                                {this.state.currentQuestion ===
-                                this.questions.length - 1
+                                {currentQuestion === this.questions.length - 1
                                     ? "FINISH"
                                     : "NEXT"}
                             </button>
