@@ -1,3 +1,4 @@
+// import { useState } from "react";
 import React from "react";
 import "./App.css";
 
@@ -48,6 +49,12 @@ class App extends React.Component {
             score: 0,
         };
     }
+    initialState = {
+        setCurrentQuestion: 0,
+        setShowScore: false,
+        setScore: 0,
+    };
+
     handleAnswerButtonClick = () => {
         const nextQuestion = this.state.currentQuestion + 1;
         if (nextQuestion < this.questions.length) {
@@ -69,11 +76,21 @@ class App extends React.Component {
         }
     };
 
+    restartQuiz = () => {
+        
+    };
+
     render() {
         return (
             <div className="app">
                 {this.state.showScore ? (
-                    <div>You scored {this.state.score} out of {this.questions.length}</div>
+                    <div>
+                        <div>
+                            You scored {this.state.score} out of{" "}
+                            {this.questions.length}
+                        </div>
+                        <button onClick={() => this.restartQuiz}>RESET</button>
+                    </div>
                 ) : (
                     <div className="question-section">
                         <div className="qustions-count">
@@ -103,11 +120,13 @@ class App extends React.Component {
                                 </button>
                             ))}
                         </div>
-                        <div
-                            className="button-section"
-                            onClick={this.handleAnswerButtonClick}
-                        >
-                            <button>NEXT</button>
+                        <div className="button-section">
+                            <button onClick={this.handleAnswerButtonClick}>
+                                {this.state.currentQuestion ===
+                                this.questions.length - 1
+                                    ? "FINISH"
+                                    : "NEXT"}
+                            </button>
                         </div>
                     </div>
                 )}
