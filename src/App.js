@@ -1,10 +1,10 @@
-// import { useState } from "react";
 import React from "react";
 import "./App.css";
 
 class App extends React.Component {
     questions = [
         {
+            id: 1,
             questionText: "1 + 3 = ?",
             answerOptions: [
                 { answerText: "4", isCorrect: true },
@@ -14,6 +14,7 @@ class App extends React.Component {
             ],
         },
         {
+            id: 2,
             questionText: "5 + 3 = ?",
             answerOptions: [
                 { answerText: "9", isCorrect: false },
@@ -23,6 +24,7 @@ class App extends React.Component {
             ],
         },
         {
+            id: 3,
             questionText: "4 + 2 = ?",
             answerOptions: [
                 { answerText: "4", isCorrect: false },
@@ -32,6 +34,7 @@ class App extends React.Component {
             ],
         },
         {
+            id: 4,
             questionText: "8 + 2 = ?",
             answerOptions: [
                 { answerText: "12", isCorrect: false },
@@ -52,7 +55,7 @@ class App extends React.Component {
         };
     }
 
-    handleAnswerButtonClick = () => {
+    handleAnswerButtonClick = (isCorrect) => {
         const nextQuestion = this.state.currentQuestion + 1;
         if (nextQuestion < this.questions.length) {
             this.setState({
@@ -63,9 +66,6 @@ class App extends React.Component {
                 showScore: true,
             });
         }
-    };
-
-    checkIsCorrect = (isCorrect) => {
         if (isCorrect === true) {
             this.setState({
                 score: this.state.score + 1,
@@ -118,23 +118,16 @@ class App extends React.Component {
                             {this.questions[currentQuestion].answerOptions.map(
                                 (answerOption) => (
                                     <button
-                                        onClick={() =>
-                                            this.checkIsCorrect(
+                                        onClick={() => {
+                                            this.handleAnswerButtonClick(
                                                 answerOption.isCorrect
-                                            )
-                                        }
+                                            );
+                                        }}
                                     >
                                         {answerOption.answerText}
                                     </button>
                                 )
                             )}
-                        </div>
-                        <div className="button-section">
-                            <button onClick={this.handleAnswerButtonClick}>
-                                {currentQuestion === this.questions.length - 1
-                                    ? "FINISH"
-                                    : "NEXT"}
-                            </button>
                         </div>
                     </div>
                 )}
