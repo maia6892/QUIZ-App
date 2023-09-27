@@ -44,6 +44,8 @@ class App extends React.Component {
         super(props);
         this.state = {
             currentQuestion: 0,
+            showScore: false,
+            score: 0,
         };
     }
     handleAnswerButtonClick = () => {
@@ -53,34 +55,62 @@ class App extends React.Component {
                 currentQuestion: this.state.currentQuestion + 1,
             });
         } else {
-            alert("That's it!");
+            this.setState({
+                showScore: true,
+            });
+        }
+    };
+
+    checkIsCorrect = (isCorrect) => {
+        if (isCorrect === true) {
+            this.setState({
+                score: this.state.score + 1,
+            });
         }
     };
 
     render() {
         return (
             <div className="app">
-                <div className="question-section">
-                    <div className="qustions-count">
-                        <span>Question {this.state.currentQuestion + 1}</span>/
-                        {this.questions.length}
+                {this.state.showScore ? (
+                    <div>You scored {this.state.score} out of {this.questions.length}</div>
+                ) : (
+                    <div className="question-section">
+                        <div className="qustions-count">
+                            <span>
+                                Question {this.state.currentQuestion + 1}
+                            </span>
+                            /{this.questions.length}
+                        </div>
+                        <div className="question-text">
+                            {
+                                this.questions[this.state.currentQuestion]
+                                    .questionText
+                            }
+                        </div>
+                        <div className="answer-section">
+                            {this.questions[
+                                this.state.currentQuestion
+                            ].answerOptions.map((answerOption) => (
+                                <button
+                                    onClick={() =>
+                                        this.checkIsCorrect(
+                                            answerOption.isCorrect
+                                        )
+                                    }
+                                >
+                                    {answerOption.answerText}
+                                </button>
+                            ))}
+                        </div>
+                        <div
+                            className="button-section"
+                            onClick={this.handleAnswerButtonClick}
+                        >
+                            <button>NEXT</button>
+                        </div>
                     </div>
-                    <div className="question-text">
-                        {
-                            this.questions[this.state.currentQuestion]
-                                .questionText
-                        }
-                    </div>
-                    <div className="answer-section">
-                        {this.questions[
-                            this.state.currentQuestion
-                        ].answerOptions.map((answerOption) => (
-                            <button onClick={this.handleAnswerButtonClick}>
-                                {answerOption.answerText}
-                            </button>
-                        ))}
-                    </div>
-                </div>
+                )}
             </div>
         );
     }
