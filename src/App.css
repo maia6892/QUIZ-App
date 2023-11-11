@@ -1,12 +1,22 @@
 .start-section p {
     margin-bottom: 30px;
 }
-.quiz-body {
+.heading {
+    text-align: center;
+}
+.quiz-heading {
+    margin-bottom: 50px;
+}
+.app-body {
     background-color: #bb947b;
     border: 5px solid #9fa9ac;
     border-radius: 20px;
     text-align: center;
     padding: 25px;
+}
+.col-sm-10 {
+    margin-right: auto;
+    margin-left: auto;
 }
 .question-text {
     margin-top: 15px;
@@ -40,4 +50,35 @@ button:last-child {
 }
 .score-section {
     margin-bottom: 30px;
+}
+
+.leaderboard {
+    background-color: #9fa9ac;
+    border: 5px solid #bb947b;
+    border-radius: 20px;
+    padding: 20px 50px;
+    margin-top: 50px;
+}
+.leaderboard-heading {
+    margin-bottom: 50px;
+}
+.leaderboard-list-item {
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+.leaderboard-list-item:last-child {
+    margin-bottom: 0px;
+}
+
+@media (max-width: 1350px) {
+    .answer-section{
+        flex-direction:column;
+    }
+    .answer-button{
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    .answer-button:last-child{
+        margin-bottom: 0px;
+    }
 }
