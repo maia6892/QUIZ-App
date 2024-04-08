@@ -125,13 +125,6 @@ function App() {
                         </div>
                         <button
                             type="submit"
-                            /* onClick={() => {
-                                setShowScore(false);
-                                // setScore(0);
-                                setCurrentQuestion(0);
-                                setShowStartButton(true);
-                                // setUser("");
-                            }} */
                         >
                             SUBMIT
                         </button>
